@@ -18,7 +18,7 @@ def collectTrackMacroData(dataPath,subjectID):
     # load macro data
     macro_data_unclean = pd.read_csv(dataPath)
     macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean['TractName'])) ]
-    macro_data_unclean['nodeID'] = [ 1 for f in range(len(tmpdata['TractName'])) ]
+    macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean['TractName'])) ]
 
     # append to output data structure
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
