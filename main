@@ -9,9 +9,9 @@
 set -e
 
 # generate csv that can be useful in MLC analyses
-[ ! -f ./tractmeasures/output_fiberStats.csv ] && time singularity exec -e docker://brainlife/freesurfer-stats:1.2 ./compile-macro-micro.py
+[ ! -f ./tractmeasures/output_FiberStats.csv ] && time singularity exec -e docker://brainlife/freesurfer-stats:1.2 ./compile-macro-micro.py
 
-if [ -f ./tractmeasures/output_fiberStats.csv ]; then
+if [ -f ./tractmeasures/output_FiberStats.csv ]; then
 	echo "complete"
 	exit 0
 else
