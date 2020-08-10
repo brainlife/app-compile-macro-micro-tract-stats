@@ -24,11 +24,8 @@ def collectTrackMacroData(dataPath,subjectID):
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
 
     macro_data = data[['subjectID','nodeID','TractName','StreamlineCount','avgerageStreamlineLength','volume']]
-    data.columns = data_columns
-
-    # identify track_names
-    track_names = list(data['structureID'][data['structureID'] != 'wbfg'].unique())
-
+    macro_data.columns = data_columns
+	
     return [macro_data]
 
 def combineTrackMacroMicro(dataPath,macro_data,profile_data):
