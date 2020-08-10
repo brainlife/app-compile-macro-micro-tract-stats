@@ -23,7 +23,7 @@ def collectTrackMacroData(dataPath,subjectID):
     # append to output data structure
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
 
-    macro_data = data[['subjectID','nodeID','TractName','StreamlineCount','avgerageStreamlineLength','volume']]
+    macro_data = macro_data[['subjectID','nodeID','TractName','StreamlineCount','avgerageStreamlineLength','volume']]
     macro_data.columns = data_columns
 	
     return [macro_data]
