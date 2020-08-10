@@ -69,8 +69,11 @@ def main():
 	print("cleaning up macro data")
 	macro_data = collectTrackMacroData(dataPath,subjectID)
 
+	print("loading profiles data")
+	profiles_data = pd.read_csv(profiles_path)
+
 	print("generating csvs")
-	combineTrackMacroMicro(outdir,)
+	combineTrackMacroMicro(outdir,macro_data,profiles_data)
 
 if __name__ == '__main__':
 	main()
