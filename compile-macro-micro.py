@@ -37,7 +37,7 @@ def combineTrackMacroMicro(dataPath,macro_data,micro_data):
     if not os.path.exists(dataPath):
         os.mkdir(dataPath)
 
-    data.to_csv(dataPath+'output_FiberStats.csv',index=False)
+    data.to_csv(dataPath+'/output_FiberStats.csv',index=False)
 
 def main():
 
