@@ -28,7 +28,7 @@ def collectTrackMacroData(dataPath,subjectID):
 	
     return [macro_data]
 
-def combineTrackMacroMicro(dataPath,macro_data,profile_data):
+def combineTrackMacroMicro(dataPath,macro_data,micro_data):
 
     # merge data frames
     data = pd.merge(micro_data,macro_data.drop(columns='nodeID'),on=['subjectID','structureID'])
