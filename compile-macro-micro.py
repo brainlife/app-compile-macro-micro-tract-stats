@@ -64,7 +64,7 @@ def main():
 
 	#### run command to generate csv structures ####
 	print("cleaning up macro data")
-	macro_data = collectTrackMacroData(dataPath,subjectID)
+	macro_data = collectTrackMacroData(macro_path,subjectID)
 
 	print("loading profiles data")
 	profiles_data = pd.read_csv(profiles_path)
