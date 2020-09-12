@@ -30,14 +30,22 @@ def collectTrackMacroData(dataPath,subjectID):
 
 def combineTrackMacroMicro(dataPath,macro_data,micro_data):
 
-    # merge data frames
-    data = pd.merge(micro_data,macro_data.drop(columns='nodeID'),on=['subjectID','structureID'])
+	# subject ID from profiles and macro data might not be saved as same datatype, making the merge not work properly. check and fix
+	if list(micro_data['subjectID'].unique()) != list(macro_data['subjectID'].unique()):
+		micro_data['subjectID'] = [ macro_data['subjectID'].unique()[0] for f in micro_data['subjectID'] ]
 
-    # output data structure for records and any further analyses
-    if not os.path.exists(dataPath):
-        os.mkdir(dataPath)
+	# make sure structureID's are the same
+	if list(macro_data['structureID'][macro_data['structureID'] != 'wbfg'].unique()) != list(micro_data['structureID'].unique()):
+		macro_data['structureID'][macro_data['structureID'] != 'wbfg'] = [ f for f in list(micro_data['structureID'].unique()) ]
 
-    data.to_csv(dataPath+'/output_FiberStats.csv',index=False)
+	# merge data frames
+	data = pd.merge(micro_data,macro_data.drop(columns='nodeID'),on=['subjectID','structureID'])
+
+	# output data structure for records and any further analyses
+	if not os.path.exists(dataPath):
+	    os.mkdir(dataPath)
+
+	data.to_csv(dataPath+'/output_FiberStats.csv',index=False)
 
 def main():
 
@@ -70,7 +78,7 @@ def main():
 	profiles_data = pd.read_csv(profiles_path)
 
 	print("generating csvs")
-	combineTrackMacroMicro(outdir,macro_data,profiles_data)
+	combineTrackMacroMicro(outdir,macro_data[macro_data['structureID'] != 'wbfg'],profiles_data)
 
 if __name__ == '__main__':
 	main()

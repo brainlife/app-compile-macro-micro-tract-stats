@@ -6,15 +6,15 @@
 #PBS -N app-compile-macro-micro-tract-stats
 #PBS -V
 
-set -e
+#set -e
 
 # generate csv that can be useful in MLC analyses
 [ ! -f ./tractmeasures/output_FiberStats.csv ] && time singularity exec -e docker://brainlife/freesurfer-stats:1.2 ./compile-macro-micro.py
 
 if [ -f ./tractmeasures/output_FiberStats.csv ]; then
 	echo "complete"
-	exit 0
+#	exit 0
 else
 	echo "stats computations failed somewhere. please check logs and derivatives"
-	exit 1
+#	exit 1
 fi
