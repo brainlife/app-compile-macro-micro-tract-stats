@@ -35,7 +35,7 @@ def combineTrackMacroMicro(dataPath,macro_data,micro_data):
 		micro_data['subjectID'] = [ macro_data['subjectID'].unique()[0] for f in micro_data['subjectID'] ]
 
 	# make sure structureID's are the same
-	if list(np.sort(macro_data['structureID'][macro_data['structureID'] != 'wbfg'].unique().tolist())) != list(np.sort(micro_data['structureID'].unique().tolist())):
+	#if list(np.sort(macro_data['structureID'][macro_data['structureID'] != 'wbfg'].unique().tolist())) != list(np.sort(micro_data['structureID'].unique().tolist())):
 		#macro_data['structureID'][macro_data['structureID'] != 'wbfg'] = [ f for f in list(micro_data['structureID'].unique()) ]
 		#need to think of better sort function. for now don't worry about. should be fine in most cases
 		
