@@ -2,7 +2,7 @@
 
 #PBS -l nodes=1:ppn=4
 #PBS -l vmem=29gb
-#PBS -l walltime=0:30:00
+#PBS -l walltime=1:00:00
 #PBS -N app-compile-macro-micro-tract-stats
 #PBS -V
 
