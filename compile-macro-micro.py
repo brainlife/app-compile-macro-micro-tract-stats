@@ -9,9 +9,6 @@ import glob
 
 def collectTrackMacroData(dataPath,subjectID):
 
-    # set up variables
-    data_columns = ['subjectID','nodeID','structureID','count','length','volume']
-
     # set up empty data frame
     macro_data = pd.DataFrame([])
 
@@ -22,13 +19,11 @@ def collectTrackMacroData(dataPath,subjectID):
 
     # append to output data structure
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
-
-    macro_data = macro_data[['subjectID','nodeID','TractName','StreamlineCount','avgerageStreamlineLength','volume']]
-    macro_data.columns = data_columns
+    macro_data.rename(columns={'TractName': 'structureID'},inplace=True)
 	
     return macro_data
 
-def combineTrackMacroMicro(dataPath,macro_data,micro_data):
+def combineTrackMacroMicro(macro_data,micro_data):
 
 	# subject ID from profiles and macro data might not be saved as same datatype, making the merge not work properly. check and fix
 	if list(micro_data['subjectID'].unique()) != list(macro_data['subjectID'].unique()):
@@ -46,11 +41,18 @@ def combineTrackMacroMicro(dataPath,macro_data,micro_data):
 	# merge data frames
 	data = pd.merge(micro_data,macro_data.drop(columns='nodeID'),on=['subjectID','structureID'])
 
+	return data
+
+def appendWBData(data,macro_data,dataPath):
+
+	# append wholebrain data
+	data = data.append(macro_data.loc[macro_data['structureID'] == 'wbfg']).reset_index(drop=True)
+	
 	# output data structure for records and any further analyses
 	if not os.path.exists(dataPath):
 	    os.mkdir(dataPath)
 
-	data.to_csv(dataPath+'/output_FiberStats.csv',index=False)
+	data.to_csv(dataPath+'/tractmeasures.csv',index=False)
 
 def main():
 
@@ -83,7 +85,8 @@ def main():
 	profiles_data = pd.read_csv(profiles_path)
 
 	print("generating csvs")
-	combineTrackMacroMicro(outdir,macro_data[macro_data['structureID'] != 'wbfg'],profiles_data)
+	macro_micro_data = combineTrackMacroMicro(macro_data[macro_data['structureID'] != 'wbfg'],profiles_data)
+	appendWBData(macro_micro_data,macro_data,outdir)
 
 if __name__ == '__main__':
 	main()
