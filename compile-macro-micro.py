@@ -66,6 +66,13 @@ def main():
 	subjectID = config['_inputs'][0]['meta']['subject']
 	macro_path = config['macro']
 
+	#### check for old datatype name
+	if not os.path.isfile(profiles_path):
+		profiles_path = profiles_path.replace('tractmeasures.csv','output_FiberStats.csv')
+
+	if not os.path.isfile(macro_path):
+		macro_path = macro_path.replace('tractmeasures.csv','output_FiberStats.csv')
+
 	#### set up other inputs ####
 	# set outdir
 	outdir = 'tractmeasures'
