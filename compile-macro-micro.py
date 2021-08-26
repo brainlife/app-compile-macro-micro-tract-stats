@@ -18,7 +18,7 @@ def collectTrackMacroData(dataPath,subjectID):
 		structure = 'TractName'
 	else:
 		structure = 'structureID'
-
+	
     macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean[structure])) ]
     macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean[structure])) ]
 
@@ -26,7 +26,7 @@ def collectTrackMacroData(dataPath,subjectID):
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
 	if 'TractName' in macro_data_unclean.keys().tolist():
 		macro_data.rename(columns={structure: 'structureID'},inplace=True)
-	
+		
     return macro_data
 
 def combineTrackMacroMicro(macro_data,micro_data):
