@@ -14,12 +14,18 @@ def collectTrackMacroData(dataPath,subjectID):
 
     # load macro data
     macro_data_unclean = pd.read_csv(dataPath)
-    macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean['TractName'])) ]
-    macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean['TractName'])) ]
+	if 'TractName' in macro_data_unclean.keys().tolist():
+		structure = 'TractName'
+	else:
+		structure = 'structureID'
+
+    macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean[structure])) ]
+    macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean[structure])) ]
 
     # append to output data structure
     macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
-    macro_data.rename(columns={'TractName': 'structureID'},inplace=True)
+	if 'TractName' in macro_data_unclean.keys().tolist():
+		macro_data.rename(columns={structure: 'structureID'},inplace=True)
 	
     return macro_data
 
