@@ -9,25 +9,25 @@ import glob
 
 def collectTrackMacroData(dataPath,subjectID):
 
-    # set up empty data frame
-    macro_data = pd.DataFrame([])
+	# set up empty data frame
+	macro_data = pd.DataFrame([])
 
-    # load macro data
-    macro_data_unclean = pd.read_csv(dataPath)
+	# load macro data
+	macro_data_unclean = pd.read_csv(dataPath)
 	if 'TractName' in macro_data_unclean.keys().tolist():
 		structure = 'TractName'
 	else:
 		structure = 'structureID'
-	
-    macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean[structure])) ]
-    macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean[structure])) ]
 
-    # append to output data structure
-    macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
+	macro_data_unclean['subjectID'] = [ subjectID for f in range(len(macro_data_unclean[structure])) ]
+	macro_data_unclean['nodeID'] = [ 1 for f in range(len(macro_data_unclean[structure])) ]
+
+	# append to output data structure
+	macro_data = macro_data.append(macro_data_unclean,ignore_index=True)
 	if 'TractName' in macro_data_unclean.keys().tolist():
 		macro_data.rename(columns={structure: 'structureID'},inplace=True)
 		
-    return macro_data
+	return macro_data
 
 def combineTrackMacroMicro(macro_data,micro_data):
 
@@ -39,11 +39,11 @@ def combineTrackMacroMicro(macro_data,micro_data):
 	#if list(np.sort(macro_data['structureID'][macro_data['structureID'] != 'wbfg'].unique().tolist())) != list(np.sort(micro_data['structureID'].unique().tolist())):
 		#macro_data['structureID'][macro_data['structureID'] != 'wbfg'] = [ f for f in list(micro_data['structureID'].unique()) ]
 		#need to think of better sort function. for now don't worry about. should be fine in most cases
-	
+
 	# need to update for issues with quickbundles seg classifcation name (temp)
 	if [ f.replace('_','') for f in macro_data['structureID'].unique() if f != 'wbfg' ] == list(np.sort(micro_data['structureID'].unique().tolist())):
 		macro_data['structureID'] = [ f.replace('_','') for f in macro_data['structureID'].unique() ]
-	
+
 	# merge data frames
 	data = pd.merge(micro_data,macro_data.drop(columns='nodeID'),on=['subjectID','structureID'])
 
@@ -53,10 +53,10 @@ def appendWBData(data,macro_data,dataPath):
 
 	# append wholebrain data
 	data = data.append(macro_data.loc[macro_data['structureID'] == 'wbfg']).reset_index(drop=True)
-	
+
 	# output data structure for records and any further analyses
 	if not os.path.exists(dataPath):
-	    os.mkdir(dataPath)
+    	os.mkdir(dataPath)
 
 	data.to_csv(dataPath+'/tractmeasures.csv',index=False)
 
@@ -82,7 +82,7 @@ def main():
 	#### set up other inputs ####
 	# set outdir
 	outdir = 'tractmeasures'
-	
+
 	# generate output directory if not already there
 	if os.path.isdir(outdir):
 		print("directory exits")
