@@ -56,7 +56,7 @@ def appendWBData(data,macro_data,dataPath):
 
 	# output data structure for records and any further analyses
 	if not os.path.exists(dataPath):
-    	os.mkdir(dataPath)
+		os.mkdir(dataPath)
 
 	data.to_csv(dataPath+'/tractmeasures.csv',index=False)
 
