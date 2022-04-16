@@ -1,9 +1,9 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.436-blue.svg)](https://doi.org/https://doi.org/10.25663/brainlife.app.436)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.397-blue.svg)](https://doi.org/https://doi.org/10.25663/brainlife.app.397)
 
-# Compile measures from dsistudio tractmeasures datatype
+# Compile tract macro-structural and profile data
 
-This app will This app will compile the tsv outputs for each tract from dsistudio into a single csv to ease downstream analyses. This is done using python, specifically nibabel, pandas and numpy.
+This app will This app will compile the csv outputs from macrostructural statistics apps like Tractography Quality Check with the profilometry data from Tract Analysis Profiles (micro-stats) into a single csv to ease downstream analyses. This is done using python, specifically nibabel, pandas and numpy.
 
 ### Authors
 
@@ -29,15 +29,13 @@ We kindly ask that you cite the following articles when publishing papers and co
 
 1. Avesani, P., McPherson, B., Hayashi, S. et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). https://doi.org/10.1038/s41597-019-0073-y
 
-2. Yeh, Fang-cheng. 'Shape Analysis of the Human Association Pathways.' Neuroimage (2020).
-
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
 
 ## Running the App
 
 ### On Brainlife.io
 
-You can submit this App online at [https://doi.org/https://doi.org/10.25663/brainlife.app.436](https://doi.org/https://doi.org/10.25663/brainlife.app.436) via the 'Execute' tab.
+You can submit this App online at [https://doi.org/https://doi.org/10.25663/brainlife.app.397](https://doi.org/https://doi.org/10.25663/brainlife.app.397) via the 'Execute' tab.
 
 ### Running Locally (on your machine)
 
@@ -47,7 +45,8 @@ You can submit this App online at [https://doi.org/https://doi.org/10.25663/brai
 
 ```json
 {
-	"tractmeasures": "/input/tractmeasures/"
+	"profiles": "/input/profiles/tractmeasures.nii.gz",
+	"macro": "/input/macro/tractmeasures.csv"
 }
 ```
 
@@ -65,12 +64,12 @@ bl dataset download
 3. Launch the App by executing 'main'
 
 ```bash
-./main 
+./main
 ```
 
 ## Output
 
-The main output of this App is a tractmeasures datatype containing a csv with the statistics for each tract combined.
+The main output of this App is a tractmeasures datatype containing a csv with macro and micro-structural statistics combined.
 
 #### Product.json
 
