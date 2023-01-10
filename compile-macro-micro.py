@@ -28,7 +28,10 @@ def collectTrackMacroData(dataPath,subjectID):
 		macro_data.rename(columns={structure: 'structureID'},inplace=True)
 		
 	# remove underscores from tract names
-	macro_data['structureID'] = [ f if '_' not in f else f.replace('_') for f in macro_data['structureID'] ]
+	macro_data['structureID'] = [ f if '_' not in f else f.replace('_','') for f in macro_data['structureID'] ]
+	
+	# remove '.' from tract names
+	macro_data['structureID'] = [ f if '.' not in f else f.replace('.','') for f in macro_data['structureID'] ]
 		
 	return macro_data
 
