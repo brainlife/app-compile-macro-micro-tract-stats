@@ -27,6 +27,9 @@ def collectTrackMacroData(dataPath,subjectID):
 	if 'TractName' in macro_data_unclean.keys().tolist():
 		macro_data.rename(columns={structure: 'structureID'},inplace=True)
 		
+	# remove underscores from tract names
+	macro_data['structureID'] = [ f if '_' not in f else f.replace('_') for f in macro_data['structureID'] ]
+		
 	return macro_data
 
 def combineTrackMacroMicro(macro_data,micro_data):
