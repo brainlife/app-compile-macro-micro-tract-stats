@@ -29,7 +29,10 @@ def collectTrackMacroData(dataPath,subjectID):
 		
 	# remove underscores from tract names
 	macro_data['structureID'] = [ f if '_' not in f else f.replace('_','') for f in macro_data['structureID'] ]
-	
+
+	# remove hyphens from tract names
+	macro_data['structureID'] = [ f if '-' not in f else f.replace('-','') for f in macro_data['structureID'] ]
+
 	# remove '.' from tract names
 	macro_data['structureID'] = [ f if '.' not in f else f.replace('.','') for f in macro_data['structureID'] ]
 		
