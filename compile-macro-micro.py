@@ -47,7 +47,7 @@ def combineTrackMacroMicro(macro_data,micro_data):
 		#need to think of better sort function. for now don't worry about. should be fine in most cases
 
 	# need to update for issues with quickbundles seg classifcation name (temp)
-	if [ f.replace('_','') for f in macro_data['structureID'].unique() if f != 'wbfg' ] == list(np.sort(micro_data['structureID'].unique().tolist())):
+	if [ f.replace('_','').replace('-','') for f in macro_data['structureID'].unique() if f != 'wbfg' ] == list(np.sort(micro_data['structureID'].unique().tolist())):
 		macro_data['structureID'] = [ f.replace('_','') for f in macro_data['structureID'].unique() ]
 
 	# merge data frames
