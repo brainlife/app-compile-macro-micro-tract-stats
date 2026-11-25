@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
 </p>
 
-## 🧠 At a glance
+## At a glance
 
 <!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
 
@@ -20,20 +20,20 @@ Reads the macrostructure CSV and the tract profiles CSV, harmonises subject and 
 
 | | |
 |---|---|
-| 📥 **Inputs** | `neuro/tractmeasures` ×2 |
-| 📤 **Outputs** | `neuro/tractmeasures` |
-| 🐳 **Container** | `brainlife/freesurfer-stats:1.2` |
-| ⚙️ **Resources** | 4 CPUs |
-| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.397](https://doi.org/10.25663/brainlife.app.397) |
+| **Inputs** | `neuro/tractmeasures` ×2 |
+| **Outputs** | `neuro/tractmeasures` |
+| **Container** | `brainlife/freesurfer-stats:1.2` |
+| **Resources** | 4 CPUs |
+| **Run it** | [doi.org/10.25663/brainlife.app.397](https://doi.org/10.25663/brainlife.app.397) |
 
-#### 📥 Inputs
+#### Inputs
 
 | Input | Datatype | Required | Description |
 |---|---|---|---|
 | `profiles` | `neuro/tractmeasures` (profiles) | yes | Tract profiles CSV (tractmeasures with node-wise microstructure values per tract). |
 | `macro` | `neuro/tractmeasures` (!profiles, !macro_micro) | yes | Tract macrostructure CSV (for example from Tractography Quality Check) with one row per tract and a wbfg whole-brain row. |
 
-#### 📤 Outputs
+#### Outputs
 
 | Output | Datatype | Description |
 |---|---|---|
@@ -41,11 +41,11 @@ Reads the macrostructure CSV and the tract profiles CSV, harmonises subject and 
 
 <!-- brainlife-app:end -->
 
-## 🚀 Running the App
+## Running the App
 
 The App runs from the [`v1.1`](https://github.com/brainlife/app-compile-macro-micro-tract-stats/tree/v1.1) branch of this repository.
 
-### ☁️ On brainlife.io
+### On brainlife.io
 
 Open the App at [doi.org/10.25663/brainlife.app.397](https://doi.org/10.25663/brainlife.app.397) and choose two `neuro/tractmeasures` datasets of the same subject:
 
@@ -54,7 +54,7 @@ Open the App at [doi.org/10.25663/brainlife.app.397](https://doi.org/10.25663/br
 
 Press **Execute**. The App has no options. The combined table is archived to your project as a `neuro/tractmeasures` dataset tagged `macro_micro`.
 
-### 💻 Locally
+### Locally
 
 You need [Singularity/Apptainer](https://apptainer.org/); pandas and NumPy come from the `brainlife/freesurfer-stats:1.2` container. Without Singularity, install Python 3 with [pandas](https://pandas.pydata.org/) and [NumPy](https://numpy.org/) and run `compile-macro-micro.py` directly.
 
@@ -77,7 +77,7 @@ You need [Singularity/Apptainer](https://apptainer.org/); pandas and NumPy come 
 
 If a `tractmeasures.csv` path does not exist, the App falls back to the older file name `output_FiberStats.csv` in the same directory.
 
-### 🧪 Sample data
+### Sample data
 
 Download sample datasets from brainlife.io with the [brainlife CLI](https://github.com/brainlife/cli):
 
@@ -88,7 +88,7 @@ mkdir input
 bl dataset download <dataset id>
 ```
 
-## 📦 Outputs
+## Outputs
 
 ```text
 tractmeasures/
@@ -97,11 +97,11 @@ tractmeasures/
 
 Before merging, the App strips underscores, hyphens and dots from tract names in the macrostructure table, then joins the two tables on `subjectID` and `structureID`.
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **`stats computations failed somewhere. please check logs and derivatives`**: `tractmeasures.csv` was not produced. Check that the tract names in the two inputs match (after removing underscores, hyphens and dots) and read the task log.
 
-## 📚 Citing
+## Citing
 
 > [!TIP]
 > If you use this App in your work, please cite the App, the software it builds on and brainlife.io (below). GitHub's **Cite this repository** button gives the App citation in APA and BibTeX.
@@ -111,7 +111,7 @@ Before merging, the App strips underscores, hyphens and dots from tract names in
 - Fischl. FreeSurfer. *NeuroImage* 62:774-781 (2012). [doi:10.1016/j.neuroimage.2012.01.021](https://doi.org/10.1016/j.neuroimage.2012.01.021)
 - Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
 
-## 👥 Authors
+## Authors
 
 - Brad Caron
 
@@ -119,7 +119,7 @@ Before merging, the App strips underscores, hyphens and dots from tract names in
 
 **Project director:** Franco Pestilli
 
-## 💰 Funding
+## Funding
 
 [![Wellcome-226486/Z/22/Z](https://img.shields.io/badge/Wellcome-226486%2FZ%2F22%2FZ-purple.svg)](https://wellcome.org/)
 [![NIH-NINDS-U24NS140384](https://img.shields.io/badge/NIH_NINDS-U24NS140384-green.svg)](https://reporter.nih.gov/project-details/11261037)
@@ -138,6 +138,6 @@ Before merging, the App strips underscores, hyphens and dots from tract names in
 
 <sub>brainlife.io is publicly funded, and acknowledging that support helps keep it running. This App was developed with support from Wellcome, the U.S. National Institutes of Health (including the BRAIN Initiative BRAIN CONNECTS program: The Axonal Projectome EXchange, U24NS140384, and the Center for Mesoscale Connectomics, UM1NS132207) and the U.S. National Science Foundation.</sub>
 
-## ⚖️ License
+## License
 
 [MIT](LICENSE). Copyright (c) 2020 brainlife.io, The University of Texas at Austin and Indiana University.
