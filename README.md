@@ -3,6 +3,30 @@
 
 # Compile tract macro-structural and profile data
 
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+**Merges tract macrostructural statistics (for example from Tractography Quality Check) with tract profile measures into a single tractmeasures CSV per subject, using pandas.**
+
+Reads the macrostructure CSV and the tract profiles CSV, harmonises subject and tract names (removing underscores, hyphens and dots), merges them on subjectID and structureID, and appends the whole-brain (wbfg) row. Use it to prepare one table per subject for group analyses of tract shape and microstructure. Needs a profiles tractmeasures and a macro tractmeasures from the same subject with matching tract names.
+
+Run it on brainlife.io: [https://doi.org/10.25663/brainlife.app.397](https://doi.org/10.25663/brainlife.app.397)
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `profiles` | `neuro/tractmeasures` (profiles) | yes | Tract profiles CSV (tractmeasures with node-wise microstructure values per tract). |
+| `macro` | `neuro/tractmeasures` (!profiles, !macro_micro) | yes | Tract macrostructure CSV (for example from Tractography Quality Check) with one row per tract and a wbfg whole-brain row. |
+
+| Output | Datatype | Description |
+|---|---|---|
+| `tractmeasures` | `neuro/tractmeasures` | tractmeasures.csv combining profile and macrostructural measures per tract, plus the whole-brain row. |
+
+Runtime: container `brainlife/freesurfer-stats:1.2`; 4 CPUs.
+
+Please cite:
+- Avesani P. et al. The open diffusion data derivatives. Sci Data 6, 69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
+
+<!-- brainlife-app:end -->
+
 This app will This app will compile the csv outputs from macrostructural statistics apps like Tractography Quality Check with the profilometry data from Tract Analysis Profiles (micro-stats) into a single csv to ease downstream analyses. This is done using python, specifically nibabel, pandas and numpy.
 
 ### Authors
